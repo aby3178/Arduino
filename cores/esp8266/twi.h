@@ -34,7 +34,7 @@ extern "C" {
 #define I2C_SDA_HELD_LOW_AFTER_INIT 4
 
 #ifndef TWI_BUFFER_LENGTH
-#define TWI_BUFFER_LENGTH 32
+#define TWI_BUFFER_LENGTH 64
 #endif
 
 void twi_init(unsigned char sda, unsigned char scl);
