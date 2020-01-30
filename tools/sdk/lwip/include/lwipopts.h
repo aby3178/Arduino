@@ -815,12 +815,12 @@
 
 /** DNS maximum number of entries to maintain locally. */
 #ifndef DNS_TABLE_SIZE
-#define DNS_TABLE_SIZE                  4
+#define DNS_TABLE_SIZE                  1  // 4 --> save heap
 #endif
 
 /** DNS maximum host name length supported in the name table. */
 #ifndef DNS_MAX_NAME_LENGTH
-#define DNS_MAX_NAME_LENGTH             256
+#define DNS_MAX_NAME_LENGTH             50 //256 --> save heap
 #endif
 
 /** The maximum of DNS servers */
