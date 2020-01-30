@@ -88,6 +88,9 @@
 static const char mem_debug_file[] ICACHE_RODATA_ATTR = __FILE__;
 #endif
 
+#define DHCP_GLOBAL_XID_HEADER "stdlib.h"
+#define DHCP_GLOBAL_XID rand()
+
 /** Default for DHCP_GLOBAL_XID is 0xABCD0000
  * This can be changed by defining DHCP_GLOBAL_XID and DHCP_GLOBAL_XID_HEADER, e.g.
  *  #define DHCP_GLOBAL_XID_HEADER "stdlib.h"
@@ -1697,6 +1700,7 @@ dhcp_create_msg(struct netif *netif, struct dhcp *dhcp, u8_t message_type)
   static u32_t xid;
   static u8_t xid_initialised = 0;
   if (!xid_initialised) {
+	srand(micros());
     xid = DHCP_GLOBAL_XID;
     xid_initialised = !xid_initialised;
   }
@@ -1736,7 +1740,7 @@ dhcp_create_msg(struct netif *netif, struct dhcp *dhcp, u8_t message_type)
   dhcp->msg_out->secs = 0;
   /* we don't need the broadcast flag since we can receive unicast traffic
      before being fully configured! */
-  dhcp->msg_out->flags = 0;
+  dhcp->msg_out->flags = 128; // <-- changed to broadcast (tkl/29.06.2017)
   ip_addr_set_zero(&dhcp->msg_out->ciaddr);
   /* set ciaddr to netif->ip_addr based on message_type and state */
   if ((message_type == DHCP_INFORM) || (message_type == DHCP_DECLINE) ||
