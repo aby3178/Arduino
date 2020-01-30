@@ -185,6 +185,9 @@ unsigned long ICACHE_RAM_ATTR millis()
   // (d) Truncated sum, high-acc
   acc.a[1] += (uint32_t)( c * (uint64_t)MAGIC_1E3_wHI );
 
+  // TODO enable this to test rollover (will rollover after 3 minutes after startup)
+  // acc.a[1] += ((uint32_t)-1) - (3 * 60 * 1000);
+
   return ( acc.a[1] );  // Extract result, high-acc
 
 } //millis
