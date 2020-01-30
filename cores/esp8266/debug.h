@@ -31,3 +31,28 @@ void __panic_func(const char* file, int line, const char* func) __attribute__((n
 
 
 #endif//ARD_DEBUG_H
+
+#ifdef DEBUG_IBRICKS_LEVEL0
+#define RELEASE_PRINTLN(...) Serial.println(__VA_ARGS__)
+#define RELEASE_PRINTF(...) Serial.printf(__VA_ARGS__)
+#else
+#define RELEASE_PRINTLN(...)
+#define RELEASE_PRINTF(...)
+#endif
+
+#ifdef DEBUG_IBRICKS_LEVEL1
+#define DEBUG_LOOP(...) Serial.println(__VA_ARGS__)
+#define DEBUG_ERROR(...) Serial.println(__VA_ARGS__)
+#define DEBUG_INFO(...) Serial.println(__VA_ARGS__)
+#else
+#define DEBUG_LOOP(...)
+#define DEBUG_ERROR(...)
+#define DEBUG_INFO(...)
+#endif
+
+#ifdef DEBUG_IBRICKS_LEVEL2
+#define DEBUG_DEBUG(...) Serial.println(__VA_ARGS__)
+#else
+#define DEBUG_DEBUG(...)
+#endif
+

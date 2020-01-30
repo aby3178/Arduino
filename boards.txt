@@ -192,6 +192,13 @@ generic.menu.FlashSize.2M.build.rfcal_addr=0x1FC000
 generic.menu.FlashSize.2M.build.spiffs_start=0x100000
 generic.menu.FlashSize.2M.build.spiffs_end=0x1FB000
 generic.menu.FlashSize.2M.build.spiffs_blocksize=8192
+generic.menu.FlashSize.2M256=2M (256K SPIFFS)
+generic.menu.FlashSize.2M256.build.flash_size=2M
+generic.menu.FlashSize.2M256.build.flash_ld=eagle.flash.2m256.ld
+generic.menu.FlashSize.2M256.build.spiffs_start=0x1BB000
+generic.menu.FlashSize.2M256.build.spiffs_end=0x1FB000
+generic.menu.FlashSize.2M256.build.spiffs_blocksize=4096
+generic.menu.FlashSize.2M256.upload.maximum_size=900080
 generic.menu.FlashSize.4M1M=4M (1M SPIFFS)
 generic.menu.FlashSize.4M1M.build.flash_size=4M
 generic.menu.FlashSize.4M1M.build.flash_size_bytes=0x400000
@@ -345,6 +352,16 @@ generic.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDAT
 generic.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM
 generic.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
 generic.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
+
+generic.menu.DebugLevel.iBricksProduction=iBricks Production
+generic.menu.DebugLevel.iBricksProduction.build.debug_level=-DDEBUG_IBRICKS_PRODUCTION -DDEBUG_IBRICKS_LEVEL0
+generic.menu.DebugLevel.iBricksTest0=iBricks Test Level 0
+generic.menu.DebugLevel.iBricksTest0.build.debug_level=-DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0
+generic.menu.DebugLevel.iBricksTest1=iBricks Test Level 0 + 1
+generic.menu.DebugLevel.iBricksTest1.build.debug_level=-DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1
+generic.menu.DebugLevel.iBricksTest2=iBricks Test Level 0 + 1 + 2
+generic.menu.DebugLevel.iBricksTest2.build.debug_level=-DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1 -DDEBUG_IBRICKS_LEVEL2
+
 generic.menu.FlashErase.none=Only Sketch
 generic.menu.FlashErase.none.upload.erase_cmd=
 generic.menu.FlashErase.sdk=Sketch + WiFi Settings
