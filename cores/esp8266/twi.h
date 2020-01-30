@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#define TWI_BUFFER_LENGTH 64
 #define I2C_OK                      0
 #define I2C_SCL_HELD_LOW            1
 #define I2C_SCL_HELD_LOW_AFTER_READ 2
