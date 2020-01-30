@@ -34,6 +34,7 @@
 
 static const char Content_Type[] PROGMEM = "Content-Type";
 static const char filename[] PROGMEM = "filename";
+static bool hasTimeOutReadByte = false;
 
 static char* readBytesWithTimeout(WiFiClient& client, size_t maxLength, size_t& dataLength, int timeout_ms)
 {
@@ -355,14 +356,25 @@ void ESP8266WebServer::_uploadWriteByte(uint8_t b){
   _currentUpload->buf[_currentUpload->currentSize++] = b;
 }
 
-uint8_t ESP8266WebServer::_uploadReadByte(WiFiClient& client){
-  int res = client.read();
-  if(res == -1){
-    while(!client.available() && client.connected())
-      yield();
-    res = client.read();
-  }
-  return (uint8_t)res;
+uint8_t ESP8266WebServer::_uploadReadByte(WiFiClient& client) {
+	ulong timeStart = millis();
+	int res = client.read();
+	if (res == -1) {
+		while (!client.available() && client.connected())
+		{
+			yield();
+			if (millis() - timeStart > (10 * 1000))
+			{
+#ifdef DEBUG_ESP_HTTP_SERVER
+				DEBUG_OUTPUT.println("_uploadReadByte() timeout ");
+#endif
+				hasTimeOutReadByte = true;
+				return (uint8_t)0;
+			}
+		}
+		res = client.read();
+	}
+	return (uint8_t)res;
 }
 
 bool ESP8266WebServer::_parseForm(WiFiClient& client, String boundary, uint32_t len){
@@ -475,16 +487,16 @@ bool ESP8266WebServer::_parseForm(WiFiClient& client, String boundary, uint32_t 
             uint8_t argByte = _uploadReadByte(client);
 readfile:
             while(argByte != 0x0D){
-              if (!client.connected()) return _parseFormUploadAborted();
+              if (!client.connected() || hasTimeOutReadByte) return _parseFormUploadAborted();
               _uploadWriteByte(argByte);
               argByte = _uploadReadByte(client);
             }
 
             argByte = _uploadReadByte(client);
-            if (!client.connected()) return _parseFormUploadAborted();
+            if (!client.connected() || hasTimeOutReadByte) return _parseFormUploadAborted();
             if (argByte == 0x0A){
               argByte = _uploadReadByte(client);
-              if (!client.connected()) return _parseFormUploadAborted();
+              if (!client.connected() || hasTimeOutReadByte) return _parseFormUploadAborted();
               if ((char)argByte != '-'){
                 //continue reading the file
                 _uploadWriteByte(0x0D);
@@ -492,7 +504,7 @@ readfile:
                 goto readfile;
               } else {
                 argByte = _uploadReadByte(client);
-                if (!client.connected()) return _parseFormUploadAborted();
+                if (!client.connected() || hasTimeOutReadByte) return _parseFormUploadAborted();
                 if ((char)argByte != '-'){
                   //continue reading the file
                   _uploadWriteByte(0x0D);
@@ -610,6 +622,12 @@ String ESP8266WebServer::urlDecode(const String& text)
 
 bool ESP8266WebServer::_parseFormUploadAborted(){
   _currentUpload->status = UPLOAD_FILE_ABORTED;
+  hasTimeOutReadByte = false;
+
+#ifdef DEBUG_ESP_HTTP_SERVER
+  DEBUG_OUTPUT.println("UPLOAD_FILE_ABORTED");
+#endif
+
   if(_currentHandler && _currentHandler->canUpload(_currentUri))
     _currentHandler->upload(*this, _currentUri, *_currentUpload);
   return false;
