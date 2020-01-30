@@ -82,8 +82,9 @@ private:
   inline void setDataBits(uint16_t bits);
 };
 
-#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SPI)
-extern SPIClass SPI;
-#endif
+// Save heap -> not used  -DJ
+//#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SPI)
+//extern SPIClass SPI;
+//#endif
 
 #endif

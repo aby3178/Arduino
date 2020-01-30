@@ -164,6 +164,7 @@ class UpdaterClass {
     MD5Builder _md5;
 };
 
-extern UpdaterClass Update;
+// heap save -> this singleton is never used
+// extern UpdaterClass Update;
 
 #endif

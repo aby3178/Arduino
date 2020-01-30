@@ -420,4 +420,5 @@ void UpdaterClass::printError(Print &out){
   }
 }
 
-UpdaterClass Update;
+// heap save -> this singleton is never used
+// UpdaterClass Update;

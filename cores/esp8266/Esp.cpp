@@ -464,6 +464,7 @@ uint32_t EspClass::getFreeSketchSpace() {
     return freeSpaceEnd - freeSpaceStart;
 }
 
+/* Save heap -> we have our own Updater, not necessary
 bool EspClass::updateSketch(Stream& in, uint32_t size, bool restartOnFail, bool restartOnSuccess) {
   if(!Update.begin(size)){
 #ifdef DEBUG_SERIAL
@@ -498,6 +499,7 @@ bool EspClass::updateSketch(Stream& in, uint32_t size, bool restartOnFail, bool 
     if(restartOnSuccess) ESP.restart();
     return true;
 }
+*/
 
 static const int FLASH_INT_MASK = ((B10 << 8) | B00111010);
 
