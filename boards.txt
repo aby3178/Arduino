@@ -361,6 +361,12 @@ generic.menu.DebugLevel.iBricksTest1=iBricks Test Level 0 + 1
 generic.menu.DebugLevel.iBricksTest1.build.debug_level=-DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1
 generic.menu.DebugLevel.iBricksTest2=iBricks Test Level 0 + 1 + 2
 generic.menu.DebugLevel.iBricksTest2.build.debug_level=-DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1 -DDEBUG_IBRICKS_LEVEL2
+generic.menu.DebugLevel.iBricksDev0=iBricks Dev Level 0
+generic.menu.DebugLevel.iBricksDev0.build.debug_level=-DDEBUG_IBRICKS_DEV -DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0
+generic.menu.DebugLevel.iBricksDev1=iBricks Dev Level 0 + 1
+generic.menu.DebugLevel.iBricksDev1.build.debug_level=-DDEBUG_IBRICKS_DEV -DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1
+generic.menu.DebugLevel.iBricksDev2=iBricks Dev Level 0 + 1 + 2
+generic.menu.DebugLevel.iBricksDev2.build.debug_level=-DDEBUG_IBRICKS_DEV -DDEBUG_IBRICKS_TEST -DDEBUG_IBRICKS_LEVEL0 -DDEBUG_IBRICKS_LEVEL1 -DDEBUG_IBRICKS_LEVEL2
 
 generic.menu.FlashErase.none=Only Sketch
 generic.menu.FlashErase.none.upload.erase_cmd=
