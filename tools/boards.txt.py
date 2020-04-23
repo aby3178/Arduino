@@ -286,7 +286,7 @@ boards = collections.OrderedDict([
             'crystalfreq_menu',
             'flashmode_dout',
             'flashfreq_40',
-            '1M',
+            '1M', '2M',
             'led',
             ],
         'desc': [ 'ESP8285 (`datasheet <http://www.espressif.com/sites/default/files/0a-esp8285_datasheet_en_v1.0_20160422.pdf>`__) is a multi-chip package which contains ESP8266 and 1MB flash. All points related to bootstrapping resistors and recommended circuits listed above apply to ESP8285 as well.',
@@ -863,21 +863,41 @@ boards = collections.OrderedDict([
             'More details at https://shop.makestro.com/product/espectrocore/',
         ],
     }),
+
+	( 'eduinowifi', {
+        'name': 'Schirmilabs Eduino WiFi',
+        'opts': {
+            '.build.board': 'ESP8266_SCHIRMILABS_EDUINO_WIFI',
+            '.build.variant': 'eduinowifi',
+            },
+        'macro': [
+            'resetmethod_nodemcu',
+            'flashmode_dio',
+            'flashfreq_40',
+            '4M',
+            ],
+        'serial': '512',
+        'desc': [ 'Eduino WiFi is an Arduino-compatible DIY WiFi development board using an ESP-12 module',
+		          '',
+				  'Product page: https://schirmilabs.de/?page_id=165',
+				  ]
+
+    }),
     ( 'sonoff', {
         'name': 'ITEAD Sonoff',
         'opts': {
-            '.build.board': 'SONOFF_SV',
+            '.build.board': 'ESP8266_SONOFF_SV',
             '.build.variant': 'itead',
             '.build.extra_flags': '-DESP8266',
             '.build.flash_size': '1M',
             '.menu.BoardModel.sonoffSV': 'ITEAD Sonoff SV',
-            '.menu.BoardModel.sonoffSV.build.board': 'SONOFF_SV',
+            '.menu.BoardModel.sonoffSV.build.board': 'ESP8266_SONOFF_SV',
             '.menu.BoardModel.sonoffTH': 'ITEAD Sonoff TH',
-            '.menu.BoardModel.sonoffTH.build.board': 'SONOFF_TH',
+            '.menu.BoardModel.sonoffTH.build.board': 'ESP8266_SONOFF_TH',
             '.menu.BoardModel.sonoffBasic': 'ITEAD Sonoff Basic',
-            '.menu.BoardModel.sonoffBasic.build.board': 'SONOFF_BASIC',
+            '.menu.BoardModel.sonoffBasic.build.board': 'ESP8266_SONOFF_BASIC',
             '.menu.BoardModel.sonoffS20': 'ITEAD Sonoff S20',
-            '.menu.BoardModel.sonoffS20.build.board': 'SONOFF_S20',
+            '.menu.BoardModel.sonoffS20.build.board': 'ESP8266_SONOFF_S20',
              },
         'macro': [
             'resetmethod_none',
@@ -932,8 +952,10 @@ boards = collections.OrderedDict([
             'is a multi-chip package which contains ESP8266 and 1MB flash. ',
             '',
         ],
+
     })
-    ])
+	])
+    
 
 ################################################################
 
